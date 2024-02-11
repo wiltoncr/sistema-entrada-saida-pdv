@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Caixa</th>
+                <th>Tipo de recebimento</th>
+                <th>Valor</th>
+                <th>Data do recebimento</th>
+                <th>Cancelada</th>
+                <th>Ações</th>
+            </tr>
+            {% for cashReceipt in cashReceipts %}
+                <tr>
+                    <td>{{ cashReceipt.box }}</td>
+                    <td>{{ cashReceipt.typeReceipt }}</td>
+                    <td>{{ cashReceipt.value }}</td>
+                    <td>{{ cashReceipt.dateReceipt | date("DD/MM/YYYY") }}</td>
+                    <td>{{ cashReceipt.canceled }}</td>
+                    <td>
+                        <a href="/cashReceipts/edit/{{cashReceipts._id}}">Editar</a>
+                        <form action="/cashReceipt/delete/{{cashReceipt._id}}?_method=DELETE" method="post">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </body>
+</html>

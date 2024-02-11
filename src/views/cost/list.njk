@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Descrição</th>
+                <th>Plano de contas</th>
+                <th>Cancelada</th>
+                <th>Usuário</th>
+                <th>Ações</th>
+            </tr>
+            {% for cost in costs %}
+                <tr>
+                    <td>{{ cost.dateCost | date("DD/MM/YYYY") }}</td>
+                    <td>{{ cost.value }}</td>
+                    <td>{{ cost.description }}</td>
+                    <td>{{ cost.chartOfAccounts }}</td>
+                    <td>{{ cost.canceled }}</td>
+                    <td>{{ cost.user }}</td>
+                    <td>
+                        <a href="/costs/edit/{{user._id}}">Editar</a>
+                        <form action="/cost/delete/{{cost._id}}?_method=DELETE" method="post">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </body>
+</html>

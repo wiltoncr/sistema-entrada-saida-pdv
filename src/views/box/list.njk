@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>data</th>
+                <th>abertura</th>
+                <th>fechamento</th>
+                <th>situacao</th>
+                <th>usuario</th>
+            </tr>
+            {% for box in boxs %}
+                <tr>
+                    <td> {{ box.dateBox | date("DD/MM/YYYY") }}</td>
+                    <td>{{ box.dateBoxOpen | date("DD/MM/YYYY HH:mm:ss") }}</td>
+                    <td>{% if box.dateBoxClose %}{{ box.dateBoxClose | date("DD/MM/YYYY HH:mm:ss") }}{% else %}  {% endif %}</td>
+                    <td>{{ box.boxClosed }}</td>
+                    <td>{{ box.user }}</td>
+                    <td>
+                        <a href="/boxs/edit/{{user._id}}">Editar</a>
+                        <form action="/box/delete/{{box._id}}?_method=DELETE" method="post">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </body>
+</html>
